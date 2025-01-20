@@ -1,17 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:JFExamenP3.Models"
              x:Class="JFExamenP3.MainPage">
-    
+
     <VerticalStackLayout Spacing="25" Padding="30">
         <Entry x:Name="CityEntry" Placeholder="Ingresa el nombre de la ciudad" />
-        <Button Text="Obtener Clima" Clicked="ObtenerClima" />
+        <Button Text="Obtener Clima y Guardar" Clicked="ObtenerClima" />
         <Label x:Name="TemperatureLabel" />
         <Label x:Name="MinMaxTempLabel" />
         <Label x:Name="DescriptionLabel" />
         <Label x:Name="WindLabel" />
         <Label x:Name="PressureLabel" />
         <Label x:Name="SunriseSunsetLabel" />
+        <Label x:Name="statusMessage"
+       TextColor="{StaticResource Primary}"
+       Grid.Row="2" />
+        <Button Text="Ver Ciudades"
+        Grid.Row="3"
+        Clicked="OnGetButtonClicked" />
+        <CollectionView x:Name="peopleList" Grid.Row="4">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:JFInfoClima">
+                    <Grid ColumnDefinitions="*,2*">
+                        <Label Grid.Column="1" Text="{Binding Main}" TextColor="{StaticResource Primary}"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 
 </ContentPage>

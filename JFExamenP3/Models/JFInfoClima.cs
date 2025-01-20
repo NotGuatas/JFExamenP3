@@ -7,12 +7,17 @@ using SQLite;
 
 namespace JFExamenP3.Models;
 
+[Table("people")]
+
 public class JFInfoClima
 {
     public Main Main { get; set; }
     public Weather[] Weather { get; set; }
     public Wind Wind { get; set; }
     public Sys Sys { get; set; }
+
+     [MaxLength(250), Unique]
+    public string? Name { get; set; }
 }
 public class Main
 {

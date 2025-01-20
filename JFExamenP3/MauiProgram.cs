@@ -16,7 +16,8 @@ namespace JFExamenP3
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            string dbPath = JFFileAccessHelper.GetLocalFilePath("people.db3");
+            builder.Services.AddSingleton<JFClimaRepository>(s => ActivatorUtilities.CreateInstance<JFClimaRepository>(s, dbPath));
 #endif
 
             return builder.Build();
