@@ -38,24 +38,20 @@ public class JFClimaRepository
         int result = 0;
         try
         {
-            // TODO: Call Init()
             await Init();
 
-            // basic validation to ensure a name was entered
             if (string.IsNullOrEmpty(main))
                 throw new Exception("Valid name required");
 
-            // TODO: Insert the new person into the database
-            // enter this line
             result = await conn.InsertAsync(new JFInfoClima { Name = main });
 
             StatusMessage = string.Format("{0} record(s) added (Name: {1})", result, main);
+            Console.WriteLine($"Ciudad guardada: {main}");  
         }
-        catch (Exception ex)
+        catch (Exception ex)    
         {
             StatusMessage = string.Format("Failed to add {0}. Error: {1}", main, ex.Message);
         }
-
     }
 
     public async Task<List<JFInfoClima>> GetAllPeople()
@@ -63,7 +59,10 @@ public class JFClimaRepository
         try
         {
             await Init();
-            return await conn.Table<JFInfoClima>().ToListAsync();
+            var people = await conn.Table<JFInfoClima>().ToListAsync();
+            Console.WriteLine($"Ciudades obtenidas: {people.Count}");  // Depuración
+
+            return people;
         }
         catch (Exception ex)
         {

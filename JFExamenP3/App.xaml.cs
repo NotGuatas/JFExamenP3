@@ -1,19 +1,26 @@
-﻿namespace JFExamenP3
+﻿namespace JFExamenP3;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    static JFClimaRepository _climaRepo;
+
+    public static JFClimaRepository ClimaRepo
     {
-        public static JFClimaRepository ClimaRepo { get; private set; }
-
-        public App(JFClimaRepository repo)
+        get
         {
-            InitializeComponent();
-            ClimaRepo = repo;
+            if (_climaRepo == null)
+            {
+                var dbPath = JFFileAccessHelper.GetLocalFilePath("clima.db3");
+                _climaRepo = new JFClimaRepository(dbPath);
+            }
+            return _climaRepo;
+        }
+    }
 
-            // MainPage = new AppShell();
-        }
-        protected override Window CreateWindow(IActivationState activationState)
-        {
-            return new Window(new AppShell());
-        }
+    public App()
+    {
+        InitializeComponent();
+
+        MainPage = new NavigationPage(new MainPage());
     }
 }
