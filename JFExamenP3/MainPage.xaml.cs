@@ -1,24 +1,21 @@
-﻿namespace JFExamenP3
+﻿using JFExamenP3.Models;
+
+namespace JFExamenP3
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private readonly JFInfoClima _weatherService;
 
         public MainPage()
         {
             InitializeComponent();
+            _weatherService = new JFInfoClima();
+
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void ObtenerClima(object sender, EventArgs e)
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+          
         }
     }
 
